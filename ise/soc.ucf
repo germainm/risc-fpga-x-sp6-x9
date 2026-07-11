@@ -1,0 +1,93 @@
+# SoC RISC-V - XC6SLX9 TQG144
+NET "clk"      LOC = "P126" | IOSTANDARD = LVCMOS33;
+NET "n_reset"  LOC = "P114" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "rxd1"     LOC = "P1"   | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "txd1"     LOC = "P2"   | IOSTANDARD = LVCMOS33;
+# Module SD (SPI)
+NET "sd_cs_n"  LOC = "P115" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "sd_mosi"  LOC = "P116" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "sd_sclk"  LOC = "P117" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "sd_miso"  LOC = "P118" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "sd_cd_n"  LOC = "P119" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "sd_led"   LOC = "P121" | IOSTANDARD = LVCMOS33;
+# LED usager (payload blink)
+NET "led"      LOC = "P133" | IOSTANDARD = LVCMOS33;
+# Horloge 50 MHz
+NET "clk" TNM_NET = "clk";
+TIMESPEC TS_clk = PERIOD "clk" 20 ns HIGH 50%;
+# LCD1602 mode 8 bits: gpio[7:0]=D0..D7, gpio[8]=RS, gpio[9]=RW, gpio[10]=E
+NET "gpio<0>"  LOC = "P51" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D0
+NET "gpio<1>"  LOC = "P55" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D1
+NET "gpio<2>"  LOC = "P56" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D2
+NET "gpio<3>"  LOC = "P57" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D3
+NET "gpio<4>"  LOC = "P58" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D4
+NET "gpio<5>"  LOC = "P59" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D5
+NET "gpio<6>"  LOC = "P61" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D6
+NET "gpio<7>"  LOC = "P62" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D7
+NET "gpio<8>"  LOC = "P47" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # RS
+NET "gpio<9>"  LOC = "P48" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # R/W (maintenu a 0)
+NET "gpio<10>" LOC = "P50" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # E
+# Afficheur 7 segments ("Nixie Tube"): segments A..G,DP
+NET "seg<0>"   LOC = "P81" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # A
+NET "seg<1>"   LOC = "P80" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # B
+NET "seg<2>"   LOC = "P79" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # C
+NET "seg<3>"   LOC = "P78" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # D
+NET "seg<4>"   LOC = "P75" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # E
+NET "seg<5>"   LOC = "P74" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # F
+NET "seg<6>"   LOC = "P12" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # G
+NET "seg<7>"   LOC = "P14" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;  # DP
+# Selection des chiffres BIT0..BIT7
+NET "dig<0>"   LOC = "P82" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<1>"   LOC = "P83" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<2>"   LOC = "P84" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<3>"   LOC = "P85" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<4>"   LOC = "P87" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<5>"   LOC = "P88" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<6>"   LOC = "P92" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "dig<7>"   LOC = "P93" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+# Cloche
+NET "bell"     LOC = "P94" | IOSTANDARD = LVCMOS33;
+# DIP switch 8 positions (a verifier avec la demo: ON = bit a 1 cote logiciel)
+NET "dip<0>"   LOC = "P16" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<1>"   LOC = "P17" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<2>"   LOC = "P21" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<3>"   LOC = "P22" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<4>"   LOC = "P23" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<5>"   LOC = "P24" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<6>"   LOC = "P26" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "dip<7>"   LOC = "P27" | IOSTANDARD = LVCMOS33 | PULLUP;
+# Bouton K4 disponible sur P15 si besoin plus tard
+#NET "k4"      LOC = "P15" | IOSTANDARD = LVCMOS33 | PULLUP;
+# LEDs de la carte D3..D14 (leds<0>=D3 ... leds<11>=D14)
+NET "leds<0>"  LOC = "P33" | IOSTANDARD = LVCMOS33;  # D3
+NET "leds<1>"  LOC = "P34" | IOSTANDARD = LVCMOS33;  # D4
+NET "leds<2>"  LOC = "P35" | IOSTANDARD = LVCMOS33;  # D5
+NET "leds<3>"  LOC = "P44" | IOSTANDARD = LVCMOS33;  # D6
+NET "leds<4>"  LOC = "P45" | IOSTANDARD = LVCMOS33;  # D7
+NET "leds<5>"  LOC = "P46" | IOSTANDARD = LVCMOS33;  # D8
+NET "leds<6>"  LOC = "P43" | IOSTANDARD = LVCMOS33;  # D9
+NET "leds<7>"  LOC = "P41" | IOSTANDARD = LVCMOS33;  # D10
+NET "leds<8>"  LOC = "P40" | IOSTANDARD = LVCMOS33;  # D11
+NET "leds<9>"  LOC = "P32" | IOSTANDARD = LVCMOS33;  # D12
+NET "leds<10>" LOC = "P30" | IOSTANDARD = LVCMOS33;  # D13
+NET "leds<11>" LOC = "P29" | IOSTANDARD = LVCMOS33;  # D14
+# Boutons poussoirs (presse = 0). K3=P114 deja utilise comme n_reset.
+NET "btn<0>"   LOC = "P111" | IOSTANDARD = LVCMOS33 | PULLUP;  # K1
+NET "btn<1>"   LOC = "P112" | IOSTANDARD = LVCMOS33 | PULLUP;  # K2
+NET "btn<2>"   LOC = "P15"  | IOSTANDARD = LVCMOS33 | PULLUP;  # K4
+# EEPROM 24C04 (I2C, collecteur ouvert, pullups carte + FPGA)
+# NB: cablage reel inverse par rapport a la serigraphie (verifie par i2cscan)
+NET "i2c_scl"  LOC = "P102" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "i2c_sda"  LOC = "P101" | IOSTANDARD = LVCMOS33 | PULLUP;
+# Second bus I2C, libre pour capteurs externes (aucun composant embarque dessus)
+NET "i2c2_scl"  LOC = "P5" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "i2c2_sda"  LOC = "P7" | IOSTANDARD = LVCMOS33 | PULLUP;
+# Port GPIO generique 8 bits pour capteurs tout-ou-rien (libre, non affecte)
+NET "xgpio<0>"  LOC = "P9"   | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<1>"  LOC = "P10"  | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<2>"  LOC = "P124" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<3>"  LOC = "P132" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<4>"  LOC = "P134" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<5>"  LOC = "P138" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<6>"  LOC = "P140" | IOSTANDARD = LVCMOS33 | PULLUP;
+NET "xgpio<7>"  LOC = "P142" | IOSTANDARD = LVCMOS33 | PULLUP;
